@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Yong\Angularjs\Ui\DataProvider\Product\Form\Modifier">
+        <arguments>
+            <argument name="locator" xsi:type="object">Magento\Catalog\Model\Locator\LocatorInterface</argument>
+            <argument name="arrayManager" xsi:type="object">Magento\Framework\Stdlib\ArrayManager</argument>
+            <argument name="swapFieldNames" xsi:type="string">angularjs_swap_data</argument>
+        </arguments>
+    </type>
+    <virtualType name="angularjs_swap_dataset1"
+        type="Yong\Angularjs\Ui\DataProvider\Product\Form\Modifier" >
+        <arguments>
+            <argument name="swapFieldNames" xsi:type="array">
+                <item name="field1" xsi:type="string">angularjs_swap_data_1</item>
+                <item name="field2" xsi:type="string">angularjs_swap_data_2</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="comboproduct" xsi:type="array">
+                    <item name="class" xsi:type="string">angularjs_swap_dataset1</item>
+                    <item name="sortOrder" xsi:type="number">125</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+</config>

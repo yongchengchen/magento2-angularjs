@@ -1,0 +1,58 @@
+<p class="hidden" modal-script="
+scope.$watch('[modal.condition.filters]', function() { modal.initData(modal.dataUrl, 'post', modal.condition, modal); }, true);
+scope.syncProduct = function(bool, productItem) {
+                for (var i = 0; i < modal.eventItem.length; i++) {
+                    if (modal.eventItem[i].simple_product_sku == productItem.sku) {
+                        if (bool) {
+                            modal.eventItem[i].is_delete = false;
+                            return;   
+                        } else {
+                            //modal.eventItem.splice(i, 1);
+                            modal.eventItem[i].is_delete = true;
+                            return;
+                        }
+                    }
+                }
+
+                modal.eventItem.push({
+                    'simple_product_id':productItem.entity_id, 
+                    'simple_product_sku':productItem.sku, 
+                    'simple_product_name':productItem.name,
+                    'simple_product_quantity':1,
+                    'price':productItem.price.replace('A$', ''),
+                    'is_delete':false
+                });
+            };
+
+"></p>
+
+<div class="modal-header">
+    <h3 class="modal-title">Simple Product List {{ modal.RDS.totalRecords }}</h3>
+</div>
+<div class="modal-body common-modal-dialog">
+    <span class="red-color font-bold">
+    </span>
+    <div class="row header">
+        <div class="col-md-2"></div>
+        <div class="col-md-3">ID</div>
+        <div class="col-md-6">
+            Product Sku<br>
+            <input type="text" filter-model="modal.condition.filters.sku" style="width:90px;height:25px"/>
+        </div>
+        <div class="col-md-12">
+            Product Name<br>
+            <input type="text" filter-model="modal.condition.filters.name" style="width:90px;height:25px"/>
+        </div>
+    </div>
+    <div class="row" ng-repeat="item in modal.RDS.items" ng-class="$index % 2 == 0 ? 'even-row' : 'odd-row'">
+        <div class="col-md-2">
+            <input type="checkbox"  ng-model="bool" ng-change="syncProduct(bool, item)"/>
+        </div>
+        <div class="col-md-3">{{item.entity_id}}</div>
+        <div class="col-md-6">{{item.sku}}</div>
+        <div class="col-md-12">{{item.name}}</div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" type="button" data-ng-click="modal.close()">OK</button>
+</div>

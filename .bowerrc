@@ -1,0 +1,6 @@
+{
+  "directory" : "./view/adminhtml/web/bower",
+  "scripts": {
+        "postinstall": "./.bower-postinstall.sh"
+    }
+}

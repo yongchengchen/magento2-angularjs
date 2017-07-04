@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="catalog_product_form"/>
+    <body> 
+        <referenceContainer name="product_form" >
+            <block class="Yong\Angularjs\Block\Adminhtml\ContainerTab">
+                <arguments>
+                    <argument name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Angularjs tab</item>
+                        <item name="collapsible" xsi:type="boolean">true</item>
+                        <item name="opened" xsi:type="boolean">true</item>
+                        <item name="sortOrder" xsi:type="string">2</item>
+                        <item name="canShow" xsi:type="boolean">true</item>
+                        <item name="componentType" xsi:type="string">fieldset</item>
+                    </argument>
+                    <argument name="child_templates" xsi:type="array">
+                        <item name="subblock1" xsi:type="string">Yong_Angularjs::catalog/product/edit/tab/angularjs.tab.phtml</item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>
